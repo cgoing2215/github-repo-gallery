@@ -4,11 +4,12 @@ const username = "cgoing2215";
 const repoList = document.querySelector(".repo-list");
 const repoSection = document.querySelector(".repos");
 const indivRepo = document.querySelector(".repo-data");
+const backToButton = document.querySelector(".view-repos");
+const filterInput = document.querySelector(".filter-repos");
 
 const gitFetch = async function (){
     const res = await fetch(`https://api.github.com/users/${username}`);
     const data = await res.json();
-
     displayData(data);
 }
 
@@ -18,7 +19,6 @@ gitFetch();
 const displayData = function (data){
     const userInfo = document.createElement("div");
     userInfo.classList.add(".user-info");
-
     userInfo.innerHTML = `
     <figure>
       <img alt="user avatar" src=${data.avatar_url} />
@@ -32,24 +32,23 @@ const displayData = function (data){
     `;
 
     profileOverview.append(userInfo);
-    gitRepos();
+    gitRepos(username);
 }
 
 // fetch repos
-const gitRepos = async function (){
+const gitRepos = async function (username){
     const fetchRepos = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
     const repoData = await fetchRepos.json();
-
     displayRepo(repoData);
 }
 
 // display info about repos
 const displayRepo = function (repos){
+    filterInput.classList.remove("hide");
     for (const repo of repos){
         const li = document.createElement("li");
         li.classList.add("repo");
-        li.innerHTML = `<h3>${repo.name} </h3>`;
-
+        li.innerHTML = `<h3>${repo.name}</h3>`;
         repoList.append(li);
     }
 };
@@ -66,11 +65,9 @@ repoList.addEventListener("click", function (e){
 const indivRepoFetch = async function (repoName){
     const fetchReq = await fetch(`https://api.github.com/repos/${username}/${repoName}`);
     const repoInfo = await fetchReq.json();
-    console.log(repoInfo);
 
     const fetchLanguages = await fetch(repoInfo.languages_url);
     const languageData = await fetchLanguages.json();
-    console.log(languageData);
     
     const languages = [];
     for (const language in languageData){
@@ -81,7 +78,11 @@ const indivRepoFetch = async function (repoName){
 
 // display specific repo info
 const displayIndivRepo = function (repoInfo, languages){
+    backToButton.classList.remove("hide");
     indivRepo.innerHTML = "";
+    indivRepo.classList.remove("hide");
+    repoSection.classList.add("hide");
+
     const div = document.createElement("div");
     div.innerHTML = `
     <h3>Name: ${repoInfo.name}</h3>
@@ -90,10 +91,30 @@ const displayIndivRepo = function (repoInfo, languages){
     <p>Languages: ${languages.join(", ")}</p>
     <a class="visit" href="${repoInfo.html_url}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>
     `;
-
     indivRepo.append(div);
+};
 
-    indivRepo.classList.remove("hide");
-    indivRepo.classList.add("repo-data");
-    repoSection.classList.add("hide");
-}
+// click event added to back to gallery button
+backToButton.addEventListener("click", function (){
+    repoSection.classList.remove("hide");
+    indivRepo.classList.add("hide");
+    backToButton.classList.add("hide");
+});
+
+// input event added to search box
+filterInput.addEventListener("input", function(e){
+    const searchValue = e.target.value;
+    const repos = document.querySelectorAll(".repo");
+    const lowerSearchValue = searchValue.toLowerCase();
+
+    // if search does not include letters of repo name, 
+    // repo display disappears, narrowing down search results
+    for (const repo of repos){
+        const lowerCaseRepo = repo.innerText.toLowerCase();
+        if (!lowerCaseRepo.includes(lowerSearchValue)){
+            repo.classList.add("hide");
+        } else {
+            repo.classList.remove("hide");
+        }
+    };
+})
