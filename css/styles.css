@@ -26,8 +26,9 @@ body {
     width: 300px;
 }
 
-.fa-github-alt {
-    color: #f29e91;
+.github-logo{
+    margin-right: 15px;
+    background-color: #ffffff;
 }
 
 img {
@@ -40,12 +41,15 @@ h1 {
     padding: 1em 0.5em;
     margin: 0;
     font-size: 3.5em;
-    text-align: center;
+    vertical-align:middle;
     background-color: #030207;
     color: #fff;
     text-transform: uppercase;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .badge {
@@ -63,7 +67,7 @@ h1 {
 .circle {
     width: 20px;
     height: 20px;
-    background-color: #483978;
+    background-color: #b0a3dc;
     border-radius: 100%;
     z-index: 99;
     align-self: center;
@@ -79,7 +83,7 @@ h1 {
 h3 {
     width: 100%;
     text-align: center;
-    color: #f86d58;
+    color: #4e63cd;
 }
 
 ul {
@@ -106,10 +110,11 @@ ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #483978;
+    background-color: #70a0cf;
     color: white;
     font-size: 18px;
     padding-bottom: 2em;
+    padding-top: 2em;
 }
 
 .user-info figure {
@@ -118,7 +123,7 @@ ul {
 }
 
 .user-info img {
-    border-radius: 100%;
+    border-radius: 30%;
 }
 
 .user-info div {
@@ -172,7 +177,7 @@ section.repo-data {
 .repo-list li {
     width: 90%;
     margin: 1em 0;
-    border: 1px solid #f86d58;
+    border: 1px solid #5873f8;
     padding: 0.5em;
 }
 
@@ -180,6 +185,7 @@ section.repo-data {
     text-align: left;
     margin: 0;
     padding: 10px;
+    text-align: center;
 }
 
 .repo-list h3:hover {
@@ -198,6 +204,8 @@ section.repo-data {
 
 .repo-data h3 {
     text-align: left;
+    color: black;
+    font-size: 20px;
 }
 
 .repo-data .visit {
