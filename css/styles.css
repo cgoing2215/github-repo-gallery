@@ -14,7 +14,6 @@ body {
 }
 
 .hide {
-    /* '!important' is to make sure that when we add the class using JS, it takes precendence */
     display: none !important;
 }
 
@@ -67,7 +66,7 @@ h1 {
 .circle {
     width: 20px;
     height: 20px;
-    background-color: #b0a3dc;
+    background-color: #fbe073;
     border-radius: 100%;
     z-index: 99;
     align-self: center;
@@ -83,7 +82,7 @@ h1 {
 h3 {
     width: 100%;
     text-align: center;
-    color: #4e63cd;
+    color: #489cc9;
 }
 
 ul {
@@ -110,7 +109,7 @@ ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #70a0cf;
+    background-color: #94c4cf;
     color: white;
     font-size: 18px;
     padding-bottom: 2em;
@@ -148,7 +147,7 @@ ul {
     margin-top: 1em;
     padding: 1em;
     margin-bottom: 1em;
-    border: 2px solid #483978;
+    border: 2px solid #000000;
 }
 
 section.repo-data {
@@ -177,7 +176,7 @@ section.repo-data {
 .repo-list li {
     width: 90%;
     margin: 1em 0;
-    border: 1px solid #5873f8;
+    border: 1px solid #000000;
     padding: 0.5em;
 }
 

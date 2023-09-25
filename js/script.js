@@ -1,4 +1,3 @@
-// div with class "overview," profile info display
 const profileOverview = document.querySelector(".overview");
 const username = "cgoing2215";
 const repoList = document.querySelector(".repo-list");
@@ -15,7 +14,6 @@ const gitFetch = async function (){
 
 gitFetch();
 
-// fetch & display User Information 
 const displayData = function (data){
     const userInfo = document.createElement("div");
     userInfo.classList.add("user-info");
@@ -35,14 +33,12 @@ const displayData = function (data){
     gitRepos(username);
 }
 
-// fetch repos
 const gitRepos = async function (username){
     const fetchRepos = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
     const repoData = await fetchRepos.json();
     displayRepo(repoData);
 }
 
-// display info about repos
 const displayRepo = function (repos){
     filterInput.classList.remove("hide");
     for (const repo of repos){
@@ -53,7 +49,6 @@ const displayRepo = function (repos){
     }
 };
 
-// click event for repo box
 repoList.addEventListener("click", function (e){
     if (e.target.matches("h3")){
         const repoName = e.target.innerText;
@@ -61,7 +56,6 @@ repoList.addEventListener("click", function (e){
     };
 });
 
-// get specific repo info
 const indivRepoFetch = async function (repoName){
     const fetchReq = await fetch(`https://api.github.com/repos/${username}/${repoName}`);
     const repoInfo = await fetchReq.json();
@@ -76,7 +70,6 @@ const indivRepoFetch = async function (repoName){
     displayIndivRepo(repoInfo, languages);
 }
 
-// display specific repo info
 const displayIndivRepo = function (repoInfo, languages){
     backToButton.classList.remove("hide");
     indivRepo.innerHTML = "";
@@ -94,21 +87,17 @@ const displayIndivRepo = function (repoInfo, languages){
     indivRepo.append(div);
 };
 
-// click event added to back to gallery button
 backToButton.addEventListener("click", function (){
     repoSection.classList.remove("hide");
     indivRepo.classList.add("hide");
     backToButton.classList.add("hide");
 });
 
-// input event added to search box
 filterInput.addEventListener("input", function(e){
     const searchValue = e.target.value;
     const repos = document.querySelectorAll(".repo");
     const lowerSearchValue = searchValue.toLowerCase();
 
-    // if search does not include letters of repo name, 
-    // repo display disappears, narrowing down search results
     for (const repo of repos){
         const lowerCaseRepo = repo.innerText.toLowerCase();
         if (!lowerCaseRepo.includes(lowerSearchValue)){
